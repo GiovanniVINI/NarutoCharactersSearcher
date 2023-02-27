@@ -2,31 +2,45 @@ import { Component } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 
 @Component({
-  selector: 'app-characters',
-  templateUrl: './app.component.html'
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class charactersComponent {
-  characters: any[] = [];
+export class AppComponent {
+  characteres: any;
 
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
     this.apollo
-      .query({
+      .query<{characters : {
+        results: any[]
+      }}>({
         query: gql`
           query {
-            character(id: "61bd1dbc918f12c17b9c6483") {
-              name
-              avatarSrc
-              description
-              village
-            }
+            characters(filter: {village: "leaf"}) {
+              info {
+                count
+                pages
+                next
+                prev
+              }
+              results {
+                _id
+                name
+                avatarSrc
+                description
+                rank
+                village
+             }
             }
           }
         `,
       })
       .subscribe((result) => {
-        this.characters = result.data as any;
+
+        console.log(result)
+        this.characteres = result.data.characters.results;
       });
   }
 }

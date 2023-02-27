@@ -1,7 +1,10 @@
-<app-characters></app-characters> 
+<body>
 <h1>characters</h1>
+  <div>
     <ul>
-      <li *ngFor="let character of characters">
-        {{ character.name }}
+      <li *ngFor="let character of characteres">
+        <img src="{{ character.avatarSrc }}" alt="" loading="lazy"> <br> {{ character.name }} <br> {{ character.description }} <br> {{ character.village }}
       </li>
     </ul>
+  </div>
+</body>
