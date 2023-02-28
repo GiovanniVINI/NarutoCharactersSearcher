@@ -1,10 +1,33 @@
 <body>
-<h1>characters</h1>
-  <div>
-    <ul>
-      <li *ngFor="let character of characteres">
-        <img src="{{ character.avatarSrc }}" alt="" loading="lazy"> <br> {{ character.name }} <br> {{ character.description }} <br> {{ character.village }}
-      </li>
-    </ul>
+<header class="Nav_header">
+  <nav class="Nav_nav">
+    <div class="img_header">
+    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2821/2821803.png" alt="">
+    </div>
+    <div class="Nav_links">
+      <p><a href=""></a>Docs</p>
+      <a href="https://github.com/FieldControl/valinor" target="_blank"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt=""></a>
+    </div>
+  </nav>
+</header>
+<main>
+  <nav>
+    <div>
+      <h2>Name</h2>
+      <input type="text">
+    </div>
+    <div>
+      <h2>Village</h2>
+      <div *ngFor="let village of villages">
+        <input type="checkbox"> {{village.name.split(' ')[0]}}
+      </div>
+    </div>
+  </nav>
+  <div class="cards" *ngFor="let character of characters">
+    <img src="{{ character.avatarSrc }}" alt="" loading="lazy"> 
+      <p> Name: {{ character.name }} </p>
+      <p> Description: {{ character.description }} </p>
+      <p> Village : {{ character.village }} </p>
   </div>
+</main>
 </body>

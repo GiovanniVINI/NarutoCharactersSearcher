@@ -7,15 +7,17 @@ import { Apollo, gql } from 'apollo-angular';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  characteres: any;
+  characters: any;
+  villages: any;
 
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
     this.apollo
-      .query<{characters : {
-        results: any[]
-      }}>({
+      .query<{
+        characters: { results: any[]},
+        villages: { results: any[]}
+      }>({
         query: gql`
           query {
             characters(filter: {village: "leaf"}) {
@@ -34,13 +36,18 @@ export class AppComponent {
                 village
              }
             }
+          villages {
+              results{ 
+              name}
+            }
           }
         `,
       })
       .subscribe((result) => {
-
         console.log(result)
-        this.characteres = result.data.characters.results;
+        this.characters = result.data.characters.results;
+        this.villages = result.data.villages.results
       });
   }
+
 }

@@ -1,7 +1,37 @@
 body {
-  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-ul{
-  list-style: none;
-} 
+.Nav_header {
+  border-bottom: 1px solid #d6d6d6;
+}
+
+.icon {
+  width: 40px;
+  height: auto;
+}
+
+.Nav_nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Nav_links  {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+
+.cards {
+  background-color: rgb(246, 241, 233);
+  border-radius: 10px;
+  padding: 20px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+
+
+
+

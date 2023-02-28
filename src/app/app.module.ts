@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { AppComponent } from './app.component';
-import { GraphQLModule } from './graphql.module';
 
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
