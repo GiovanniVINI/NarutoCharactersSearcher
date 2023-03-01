@@ -11,23 +11,25 @@
   </nav>
 </header>
 <main>
-  <nav>
-    <div>
-      <h2>Name</h2>
-      <input type="text">
-    </div>
-    <div>
+    <div class="main_content">
+    <div class="filter_villages">
       <h2>Village</h2>
       <div *ngFor="let village of villages">
         <input type="checkbox"> {{village.name.split(' ')[0]}}
       </div>
     </div>
-  </nav>
-  <div class="cards" *ngFor="let character of characters">
-    <img src="{{ character.avatarSrc }}" alt="" loading="lazy"> 
-      <p> Name: {{ character.name }} </p>
-      <p> Description: {{ character.description }} </p>
-      <p> Village : {{ character.village }} </p>
-  </div>
+    <div class="cards_section">
+      <div class="search_characters">
+        <h2>Name</h2>
+        <input type="text">
+      </div>
+    <div class="card" *ngFor="let character of characters">
+      <img src="{{ character.avatarSrc }}" alt="" loading="lazy"> 
+        <p> Name: {{ character.name }} </p>
+        <p> Description: {{ character.description }} </p>
+        <p> Village : {{ character.village }} </p>
+    </div>
+    </div>
+    </div>
 </main>
 </body>
