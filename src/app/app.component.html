@@ -1,8 +1,14 @@
 <body>
 <header class="Nav_header">
   <nav class="Nav_nav">
-    <div class="img_header">
-    <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2821/2821803.png" alt="">
+    <div class="countainerLeftNav">
+      <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2821/2821803.png" alt="">
+      <div>
+        <div action="" class="search-bar">
+          <input type="text" placeholder="Search character" name="q">
+          <button type="submit"><img src="../assets/magnifying-glass-solid.svg" alt=""></button>
+        </div>
+      </div>
     </div>
     <div class="Nav_links">
       <p><a href=""></a>Docs</p>
@@ -17,12 +23,16 @@
       <div *ngFor="let village of villages">
         <input type="checkbox"> {{village.name.split(' ')[0]}}
       </div>
+      <div>
+        <h2>Ranks</h2>
+       <div><input type="checkbox"> Chuunin </div>
+       <div><input type="checkbox"> Genin </div>
+       <div><input type="checkbox"> Jounin </div>
+       <div><input type="checkbox"> Kage </div>
+       <div><input type="checkbox"> Unknown </div>
+      </div>
     </div>
     <div class="cards_section">
-      <div class="search_characters">
-        <h2>Name</h2>
-        <input type="text">
-      </div>
     <div class="card" *ngFor="let character of characters">
       <img src="{{ character.avatarSrc }}" alt="" loading="lazy"> 
         <p> Name: {{ character.name }} </p>

@@ -16,11 +16,11 @@ export class AppComponent {
     this.apollo
       .query<{
         characters: { results: any[]},
-        villages: { results: any[]}
+        villages: { results: any[]} 
       }>({
         query: gql`
           query {
-            characters(filter: {village: "leaf"}) {
+            characters {
               info {
                 count
                 pages

@@ -4,6 +4,7 @@ body {
 
 .Nav_header {
   border-bottom: 1px solid #d6d6d6;
+  width: 100%;
 }
 
 .icon {
@@ -23,28 +24,66 @@ body {
   gap: 1.5rem;
 }
 
-.search_characters {
-  text-align: center;
+.countainerLeftNav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(189, 175, 175, 0.2);
+  display: flex;
+  align-items: center;
+  border-radius: 60px;
+  padding: 2px;
+}
+
+.search-bar input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 5px 20px;
+  font-size: 16px;
+  color: #46464c;
+}
+
+.search-bar button img {
+  width: 14px;
+}
+
+.search-bar button {
+  border: 0;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 .main_content {
-  display: flex;
+  display: grid;
+  grid-template-columns: 300px 1fr;
 }
 
 .filter_villages {
-  width: 170%;
+  border-right: 1px solid #d6d6d6;
+  padding-left: 0px;
 }
 
 .cards_section {
-  /**/
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+  grid-gap: 1rem;
+  height: 100vh;
+  overflow: auto;
 }
 
 .card {
   background-color: rgb(246, 241, 233);
   border-radius: 10px;
   padding: 20px;
-  padding-bottom: 10px;
-  margin-top: 20px;
 }
 
 
