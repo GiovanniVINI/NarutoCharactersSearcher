@@ -4,8 +4,9 @@ import { Apollo, gql } from 'apollo-angular';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent {
   characters: any;
   villages: any;
@@ -51,3 +52,4 @@ export class AppComponent {
   }
 
 }
+
