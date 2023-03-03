@@ -1,3 +1,4 @@
+<meta charset="UTF-8" />
 <body>
 <header class="Nav_header">
   <nav class="Nav_nav">
@@ -39,9 +40,9 @@
       </ul>
     </div>
     </div>
-    <div class="cards_section">
-    <div class="card" *ngFor="let character of characters">
-      <img src="{{ character.avatarSrc }}" alt="" loading="lazy"> 
+    <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"  (scrolled)="onScroll()" [scrollWindow]="true" class="cards_section">
+    <div (click)="onOpenDialogClick(character)" class="card" *ngFor="let character of characters">
+      <img src="{{ character.avatarSrc }}" alt=""> 
         <p> Name: {{ character.name }} </p>
         <p> Description: {{ character.description }} </p>
         <p> Village : {{ character.village }} </p>

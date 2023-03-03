@@ -10,7 +10,7 @@ body {
 
 li {
   list-style: none;
-  line-height: 1.5rem;
+  line-height: 1.5rem; 
 }
 
 p {
@@ -24,3 +24,5 @@ a {
   font-size: 17px;
   font-weight: 700;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

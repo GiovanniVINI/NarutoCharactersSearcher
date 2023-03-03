@@ -4,6 +4,7 @@
   border-bottom: 1px solid #d6d6d6;
   width: 100%;
   background-color: #fff;
+  z-index: 2;
 }
 
 .icon {
@@ -110,6 +111,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
   grid-gap: 1rem;
+  position: relative;
+  top: 50px;
+  padding-top: 10px;
 }
 
 .card {
