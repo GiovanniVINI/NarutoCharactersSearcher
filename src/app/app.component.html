@@ -1,65 +1,55 @@
-<body>
-<header class="Nav_header">
-  <nav class="Nav_nav">
-    <div class="countainerLeftNav">
-      <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2821/2821803.png" alt="">
-      <div>
-        <div class="search-bar">
-          <input type="text" placeholder="Search character" name="q">
-          <button type="submit"><img src="../assets/magnifying-glass-solid.svg" alt=""></button>
+
+  <app-header (serchTermChanges)="search($event)" class="header"></app-header>
+  <main main_content>
+    <div class="results">
+      <div class="filters">
+        <div>
+          <h2>Village</h2>
+          <ul>
+            <li><input type="checkbox" /> cloud</li>
+            <li><input type="checkbox" /> grass</li>
+            <li><input type="checkbox" /> springs</li>
+            <li><input type="checkbox" /> leaf</li>
+            <li><input type="checkbox" /> mist</li>
+            <li><input type="checkbox" /> flower</li>
+            <li><input type="checkbox" /> rain</li>
+            <li><input type="checkbox" /> sand</li>
+            <li><input type="checkbox" /> sound</li>
+            <li><input type="checkbox" /> star</li>
+            <li><input type="checkbox" /> rock</li>
+            <li><input type="checkbox" /> waterfall</li>
+            <li><input type="checkbox" /> tides</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Ranks</h2>
+          <ul>
+            <li><input type="checkbox" /> Chuunin</li>
+            <li><input type="checkbox" /> Genin</li>
+            <li><input type="checkbox" /> Jounin</li>
+            <li><input type="checkbox" /> Kage</li>
+            <li><input type="checkbox" /> Unknown</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        infinite-scroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()"
+        [scrollWindow]="true"
+        class="cards_section"
+      >
+        <div
+          (click)="onOpenDialogClick(character)"
+          class="card"
+          *ngFor="let character of filteredCharacters"
+        >
+          <img src="{{ character.avatarSrc }}" alt="" />
+          <p>Name: {{ character.name }}</p>
+          <p>Village : {{ character.village }}</p>
+          <p>Description: {{ character.description }}</p>
         </div>
       </div>
     </div>
-    <ul class="Nav_links">
-      <li class="redirector_docs"><a href="./docs/docs.component.html">Docs</a></li>
-      <li class="redirector_chars"><a href="">Characters</a></li>
-      <li><a href="https://github.com/FieldControl/valinor" target="_blank"><img id="github_icon" class="icon" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt=""></a></li>
-    </ul>
-  </nav>
-</header>
-<main main_content>
-    <div class="results">
-    <div class="filters">
-      <div>
-      <h2>Village</h2>
-      <ul>
-        <li> <input type="checkbox"> cloud </li>
-        <li> <input type="checkbox"> grass </li>
-        <li> <input type="checkbox"> springs </li>
-        <li> <input type="checkbox"> leaf </li>
-        <li> <input type="checkbox"> mist </li>
-        <li> <input type="checkbox"> flower </li>
-        <li> <input type="checkbox"> rain </li>
-        <li> <input type="checkbox"> sand </li>
-        <li> <input type="checkbox"> sound </li>
-        <li> <input type="checkbox"> star </li>
-        <li> <input type="checkbox"> rock </li>
-        <li> <input type="checkbox"> waterfall </li>
-        <li> <input type="checkbox"> tides </li>
-      </ul>
-      </div>
-      <div>
-      <h2>Ranks</h2>
-      <ul>
-        <li><input type="checkbox"> Chuunin </li>
-        <li><input type="checkbox"> Genin </li>
-        <li><input type="checkbox"> Jounin </li> 
-        <li><input type="checkbox"> Kage </li>
-        <li><input type="checkbox"> Unknown </li> 
-      </ul>
-    </div>
-    </div>
-    <div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"  (scrolled)="onScroll()" [scrollWindow]="true" class="cards_section">
-    <div (click)="onOpenDialogClick(character)" class="card" *ngFor="let character of characters">
-      <img src="{{ character.avatarSrc }}" alt=""> 
-        <p> Name: {{ character.name }} </p>
-        <p> Village : {{ character.village }} </p>
-        <p> Description: {{ character.description }} </p>
-    </div>
-    </div>
-    </div>
-    <div *ngFor="let character of filteredCharacters">
-      {{character.name}}
-    </div>
-</main>
-</body>
+  </main>

@@ -9,6 +9,8 @@ import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { GraphQLModule } from './graphql.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './components/header/header.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const uri = 'https://narutoql.up.railway.app/graphql'; // URL da API GraphQL
 
@@ -22,6 +24,7 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,9 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
     InfiniteScrollModule,
     GraphQLModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [ {
     provide: APOLLO_OPTIONS,

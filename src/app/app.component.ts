@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Apollo, gql } from 'apollo-angular';
 import { CardsComponent } from './components/cards/cards.component';
@@ -7,10 +7,11 @@ import { CardsComponent } from './components/cards/cards.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements OnInit {
-  characters: any;
+  characters: {name: string, village: string, description: string, avatarSrc: string }[] = [];
   villages: any;
   searchTerm: string = '';
   filteredCharacters: any;
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
       .subscribe((result) => {
         this.characters = [...this.characters, ...result.data.characters.results];
         this.pageCurrent += 1
+        this.filteredCharacters = this.characters
       });
   }
   ngOnInit() {
@@ -115,17 +117,63 @@ export class AppComponent implements OnInit {
         `,
       })
       .subscribe((result) => {
-        console.log(result)
         this.characters = result.data.characters.results;
         this.villages = result.data.villages.results;
+        this.filteredCharacters = this.characters
       });
 
-      /* search() {
-        this.filteredCharacters = this.characters.filter(characters =>
-          data.characters.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-        );
-      } */
+       
   }
+
+  search(searchTerm: string) {
+    if(!searchTerm) {
+      this.filteredCharacters = this.characters
+    }
+    this.apollo
+      .query<{
+        characters: { results: any[]},
+        villages: { results: any[]} 
+      }>({
+        query: gql`
+          query ($searchTerm: String)  {
+            characters (filter: { name: $searchTerm }) {
+              info {
+                count
+                pages
+                next
+                prev
+              }
+              results {
+                _id
+                rank
+                name
+                age
+                avatarSrc
+                description
+                rank
+                village
+                firstAnimeAppearance
+                firstMangaAppearance
+                notableFeatures
+                nameMeaning
+             }
+            }
+          villages {
+              results{ 
+              name}
+            }
+          }
+        `,
+        variables: {
+          searchTerm
+        }
+      })
+      .subscribe((result) => {
+        this.characters = result.data.characters.results;
+        this.villages = result.data.villages.results;
+        this.filteredCharacters = this.characters
+      });
+  } 
 
 }
 
