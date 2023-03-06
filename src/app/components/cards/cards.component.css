@@ -2,5 +2,10 @@ ul {
   width: 500px;
   height: 500px;
   padding: 20px;
-  border-radius: 10px;
+  background-color: rgb(246, 241, 233);
+}
+
+li {
+  padding-top: 10px;
+  line-height: 1.1rem;
 }

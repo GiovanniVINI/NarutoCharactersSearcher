@@ -12,6 +12,10 @@
   height: auto;
 }
 
+#github_icon {
+  
+}
+
 .Nav_nav {
   margin-left: 10px;
   margin-right: 10px;
@@ -100,6 +104,7 @@
   left: 0;
   bottom: 0;
   border-right: 1px solid #d6d6d6;
+  letter-spacing: 1.1px;
 } 
 
 .filters h2 {
@@ -120,6 +125,7 @@
   background-color: rgb(246, 241, 233);
   border-radius: 10px;
   padding: 20px;
+  cursor: context-menu;
 }
 
 

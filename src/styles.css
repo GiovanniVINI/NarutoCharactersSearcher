@@ -6,6 +6,7 @@
 
 body {
   font-family: 'Courier New', Courier, monospace;
+  color: #3c3939;
 }
 
 li {
@@ -25,4 +26,4 @@ a {
   font-weight: 700;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

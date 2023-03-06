@@ -12,12 +12,16 @@ import { CardsComponent } from './components/cards/cards.component';
 export class AppComponent implements OnInit {
   characters: any;
   villages: any;
+  searchTerm: string = '';
+  filteredCharacters: any;
+
 
   pageCurrent = 1
 
   constructor(private readonly apollo: Apollo, private readonly matDialog: MatDialog ) {
 
   }
+
 
   
 
@@ -51,6 +55,11 @@ export class AppComponent implements OnInit {
                 description
                 rank
                 village
+                age
+                firstAnimeAppearance
+                firstMangaAppearance
+                notableFeatures
+                nameMeaning
              }
             }
           villages {
@@ -92,6 +101,10 @@ export class AppComponent implements OnInit {
                 description
                 rank
                 village
+                firstAnimeAppearance
+                firstMangaAppearance
+                notableFeatures
+                nameMeaning
              }
             }
           villages {
@@ -104,8 +117,14 @@ export class AppComponent implements OnInit {
       .subscribe((result) => {
         console.log(result)
         this.characters = result.data.characters.results;
-        this.villages = result.data.villages.results
+        this.villages = result.data.villages.results;
       });
+
+      /* search() {
+        this.filteredCharacters = this.characters.filter(characters =>
+          data.characters.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
+      } */
   }
 
 }

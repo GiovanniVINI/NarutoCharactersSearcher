@@ -1,20 +1,19 @@
-<meta charset="UTF-8" />
 <body>
 <header class="Nav_header">
   <nav class="Nav_nav">
     <div class="countainerLeftNav">
       <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2821/2821803.png" alt="">
       <div>
-        <div action="" class="search-bar">
+        <div class="search-bar">
           <input type="text" placeholder="Search character" name="q">
           <button type="submit"><img src="../assets/magnifying-glass-solid.svg" alt=""></button>
         </div>
       </div>
     </div>
     <ul class="Nav_links">
-      <li class="redirector_docs"><a href="">Docs</a></li>
+      <li class="redirector_docs"><a href="./docs/docs.component.html">Docs</a></li>
       <li class="redirector_chars"><a href="">Characters</a></li>
-      <li><a href="https://github.com/FieldControl/valinor" target="_blank"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt=""></a></li>
+      <li><a href="https://github.com/FieldControl/valinor" target="_blank"><img id="github_icon" class="icon" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt=""></a></li>
     </ul>
   </nav>
 </header>
@@ -24,9 +23,19 @@
       <div>
       <h2>Village</h2>
       <ul>
-        <li *ngFor="let village of villages">
-          <input type="checkbox"> {{village.name.split(' ')[0]}}
-        </li>
+        <li> <input type="checkbox"> cloud </li>
+        <li> <input type="checkbox"> grass </li>
+        <li> <input type="checkbox"> springs </li>
+        <li> <input type="checkbox"> leaf </li>
+        <li> <input type="checkbox"> mist </li>
+        <li> <input type="checkbox"> flower </li>
+        <li> <input type="checkbox"> rain </li>
+        <li> <input type="checkbox"> sand </li>
+        <li> <input type="checkbox"> sound </li>
+        <li> <input type="checkbox"> star </li>
+        <li> <input type="checkbox"> rock </li>
+        <li> <input type="checkbox"> waterfall </li>
+        <li> <input type="checkbox"> tides </li>
       </ul>
       </div>
       <div>
@@ -44,10 +53,13 @@
     <div (click)="onOpenDialogClick(character)" class="card" *ngFor="let character of characters">
       <img src="{{ character.avatarSrc }}" alt=""> 
         <p> Name: {{ character.name }} </p>
-        <p> Description: {{ character.description }} </p>
         <p> Village : {{ character.village }} </p>
+        <p> Description: {{ character.description }} </p>
     </div>
     </div>
+    </div>
+    <div *ngFor="let character of filteredCharacters">
+      {{character.name}}
     </div>
 </main>
 </body>
