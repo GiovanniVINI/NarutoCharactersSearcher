@@ -10,9 +10,6 @@
   padding: 20px;
 }
 
-
-
-
 .filters {
   position: fixed;
   display: block;
@@ -46,9 +43,21 @@
   cursor: context-menu;
 }
 
-
+.card:hover {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 27%), 0 1px 2px rgb(0 0 0 / 27%);
+}
+ 
 body.theme-dark .filters {
-  background-color: #222;
-  color: #FFF;
+  background-color: #202123;
+  color: #e0e0e0;
+  border: none;
+}
+
+body.theme-dark main {
+  background-color: #343541;
+}
+
+body.theme-dark nav {
+  background-color: #202123;
 }
 
