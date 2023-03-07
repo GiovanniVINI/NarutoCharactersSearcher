@@ -175,5 +175,10 @@ export class AppComponent implements OnInit {
       });
   } 
 
+  chk(){
+    const bodyElement = document.querySelector('body')
+    bodyElement?.classList.toggle('theme-dark')
+   }
+
 }
 

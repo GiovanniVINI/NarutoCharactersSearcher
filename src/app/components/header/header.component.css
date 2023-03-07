@@ -38,7 +38,6 @@
 .label {
   width: 50px;
   height: 26px;
-  background-color:#111;
   display: flex;
   border-radius:50px;
   align-items: center;
@@ -48,30 +47,9 @@
   transform: scale(1.2);
 }
 
-.ball {
-  width: 20px;
-  height: 20px;
-  background-color: white;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  border-radius: 50%;
-  transition: transform 0.2s linear;
+img {
+  width: 30px;
 }
-
-/*  target the elemenent after the label*/
-.checkbox:checked + .label .ball{
-  transform: translateX(24px);
-}
-
-.fa-moon {
-  color: white;
-}
-
-.fa-sun {
-  color: white;
-}
-
 
 .redirector_docs {
   background-color: #505098;
@@ -124,3 +102,4 @@
   height: 30px;
   cursor: pointer;
 }
+

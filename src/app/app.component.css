@@ -33,7 +33,8 @@
   grid-gap: 1rem;
   position: relative;
   top: 50px;
-  padding-top: 10px;
+  padding: 20px;
+  padding-left: 10px;
 }
 
 .card {
@@ -44,20 +45,51 @@
 }
 
 .card:hover {
-  box-shadow: 0 1px 3px rgb(0 0 0 / 27%), 0 1px 2px rgb(0 0 0 / 27%);
+  -webkit-box-shadow: 1px 9px 12px 6px rgba(102,101,102,0.5);
+  -moz-box-shadow: 1px 9px 12px 6px rgba(102,101,102,0.5);
+  box-shadow: 1px 6px 12px 6px rgba(102,101,102,0.5);
 }
  
+body.theme-dark  {
+  background-color: #2e2f32;
+}
+
 body.theme-dark .filters {
+  color: rgb(207, 207, 200);
+  border-right: 1px solid #454141;
+}
+
+body.theme-dark .search-bar {
+  background-color: rgb(238, 238, 230);
+}
+
+body.theme-dark .Nav_header {
   background-color: #202123;
-  color: #e0e0e0;
   border: none;
 }
 
-body.theme-dark main {
-  background-color: #343541;
+body.theme-dark #github_icon {
+  filter: invert();
 }
 
-body.theme-dark nav {
-  background-color: #202123;
+body.theme-dark .card:hover {
+  box-shadow: 1px 5px 10px 5px rgba(3, 3, 3, 0.8);
 }
 
+.button_mode {
+  cursor: pointer;
+  border: none;
+  position: fixed;
+  bottom: 65px;
+  right: 25px;
+  background-color: #b20000;
+  background-size: contain;
+  background-image: url(../assets/pngegg.png);
+  background-position: center center;
+  background-clip: content-box;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  z-index: 110;
+  box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+}
