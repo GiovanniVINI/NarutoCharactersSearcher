@@ -7,41 +7,42 @@ import { CardsComponent } from './components/cards/cards.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-
 export class AppComponent implements OnInit {
-  characters: {name: string, village: string, description: string, avatarSrc: string }[] = [];
+  characters: {
+    name: string;
+    village: string;
+    description: string;
+    avatarSrc: string;
+  }[] = [];
   villages: any;
   searchTerm: string = '';
   filteredCharacters: any;
 
+  pageCurrent = 1;
 
-  pageCurrent = 1
+  constructor(
+    private readonly apollo: Apollo,
+    private readonly matDialog: MatDialog
+  ) {}
 
-  constructor(private readonly apollo: Apollo, private readonly matDialog: MatDialog ) {
-
+  onOpenDialogClick(character: any) {
+    this.matDialog.open(CardsComponent, {
+      data: {
+        character,
+      },
+    });
   }
 
-
-  
-
-  onOpenDialogClick(character: any){
-    this.matDialog.open(CardsComponent, { 
-      data: { 
-        character
-      }
-    }); 
-  }
-
-  onScroll(){ 
+  onScroll() {
     this.apollo
       .query<{
-        characters: { results: any[]},
-        villages: { results: any[]} 
+        characters: { results: any[] };
+        villages: { results: any[] };
       }>({
         query: gql`
-          query ($page: Int){
+          query ($page: Int) {
             characters(page: $page) {
               info {
                 count
@@ -61,29 +62,33 @@ export class AppComponent implements OnInit {
                 firstMangaAppearance
                 notableFeatures
                 nameMeaning
-             }
+              }
             }
-          villages {
-              results{ 
-              name}
+            villages {
+              results {
+                name
+              }
             }
           }
         `,
         variables: {
-          page: this.pageCurrent + 1
-        }
+          page: this.pageCurrent + 1,
+        },
       })
       .subscribe((result) => {
-        this.characters = [...this.characters, ...result.data.characters.results];
-        this.pageCurrent += 1
-        this.filteredCharacters = this.characters
+        this.characters = [
+          ...this.characters,
+          ...result.data.characters.results,
+        ];
+        this.pageCurrent += 1;
+        this.filteredCharacters = this.characters;
       });
   }
   ngOnInit() {
     this.apollo
       .query<{
-        characters: { results: any[]},
-        villages: { results: any[]} 
+        characters: { results: any[] };
+        villages: { results: any[] };
       }>({
         query: gql`
           query {
@@ -107,11 +112,12 @@ export class AppComponent implements OnInit {
                 firstMangaAppearance
                 notableFeatures
                 nameMeaning
-             }
+              }
             }
-          villages {
-              results{ 
-              name}
+            villages {
+              results {
+                name
+              }
             }
           }
         `,
@@ -119,24 +125,22 @@ export class AppComponent implements OnInit {
       .subscribe((result) => {
         this.characters = result.data.characters.results;
         this.villages = result.data.villages.results;
-        this.filteredCharacters = this.characters
+        this.filteredCharacters = this.characters;
       });
-
-       
   }
 
   search(searchTerm: string) {
-    if(!searchTerm) {
-      this.filteredCharacters = this.characters
+    if (!searchTerm) {
+      this.filteredCharacters = this.characters;
     }
     this.apollo
       .query<{
-        characters: { results: any[]},
-        villages: { results: any[]} 
+        characters: { results: any[] };
+        villages: { results: any[] };
       }>({
         query: gql`
-          query ($searchTerm: String)  {
-            characters (filter: { name: $searchTerm }) {
+          query ($searchTerm: String) {
+            characters(filter: { name: $searchTerm }) {
               info {
                 count
                 pages
@@ -156,29 +160,32 @@ export class AppComponent implements OnInit {
                 firstMangaAppearance
                 notableFeatures
                 nameMeaning
-             }
+              }
             }
-          villages {
-              results{ 
-              name}
+            villages {
+              results {
+                name
+              }
             }
           }
         `,
         variables: {
-          searchTerm
-        }
+          searchTerm,
+        },
       })
       .subscribe((result) => {
         this.characters = result.data.characters.results;
         this.villages = result.data.villages.results;
-        this.filteredCharacters = this.characters
+        this.filteredCharacters = this.characters;
       });
-  } 
+  }
 
-  chk(){
-    const bodyElement = document.querySelector('body')
-    bodyElement?.classList.toggle('theme-dark')
-   }
+  chk() {
+    const bodyElement = document.querySelector('body');
+    bodyElement?.classList.toggle('theme-dark');
+  }
 
+  filterVillages() {
+    const check = document.querySelector('input[type=checkbox]');
+  }
 }
-

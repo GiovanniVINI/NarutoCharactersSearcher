@@ -18,12 +18,4 @@ export class HeaderComponent implements OnInit {
       this.serchTermChanges.emit(value)
     })
   }
-
-   
-  verification: boolean = false
-  chk(){
-    const bodyElement = document.querySelector('body')
-    bodyElement?.classList.toggle('theme-dark')
-   }
-
 }
