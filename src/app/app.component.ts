@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Apollo, gql } from 'apollo-angular';
 import { CardsComponent } from './components/cards/cards.component';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +20,36 @@ export class AppComponent implements OnInit {
   villages: any;
   searchTerm: string = '';
   filteredCharacters: any;
+  form: FormGroup
+  filteredPerVillages: any;
+  
+  @Output() filterPerVillagesChanges = new EventEmitter()
 
   pageCurrent = 1;
 
   constructor(
     private readonly apollo: Apollo,
-    private readonly matDialog: MatDialog
-  ) {}
+    private readonly matDialog: MatDialog,
+    private readonly formBuilder: FormBuilder
+  ) {
+   this.form= this.formBuilder.group({
+      villages: this.formBuilder.group({
+        cloud: this.formBuilder.control(false),
+        grass: this.formBuilder.control(false),
+        springs: this.formBuilder.control(false),
+        leaf: this.formBuilder.control(false),
+        mist: this.formBuilder.control(false),
+        flower: this.formBuilder.control(false),
+        rain: this.formBuilder.control(false),
+        sand: this.formBuilder.control(false),
+        sound: this.formBuilder.control(false),
+        star: this.formBuilder.control(false),
+        rock: this.formBuilder.control(false),
+        waterfall: this.formBuilder.control(false),
+        tides: this.formBuilder.control(false),
+      })
+    })
+  }
 
   onOpenDialogClick(character: any) {
     this.matDialog.open(CardsComponent, {
@@ -42,8 +66,8 @@ export class AppComponent implements OnInit {
         villages: { results: any[] };
       }>({
         query: gql`
-          query ($page: Int) {
-            characters(page: $page) {
+          query ($page: Int, $villages: [String!]!) {
+            characters(page: $page, filter: { village: $villages}) {
               info {
                 count
                 pages
@@ -73,6 +97,7 @@ export class AppComponent implements OnInit {
         `,
         variables: {
           page: this.pageCurrent + 1,
+          villages: Object.keys(this.form.get('villages')?.value).filter(key => this.form.get('villages')?.value[key])
         },
       })
       .subscribe((result) => {
@@ -85,6 +110,10 @@ export class AppComponent implements OnInit {
       });
   }
   ngOnInit() {
+    this.form.get('villages')?.valueChanges.subscribe((value) => { 
+      const filterVillageSelected = Object.keys(value).filter(village => value[village])
+      this.searchVilage(filterVillageSelected)
+    } )
     this.apollo
       .query<{
         characters: { results: any[] };
@@ -180,22 +209,56 @@ export class AppComponent implements OnInit {
       });
   }
 
+  searchVilage(searchVillageTerm: string[]) {
+    if (!searchVillageTerm) {
+      this.filteredPerVillages = this.characters;
+    }
+    this.apollo
+      .query<{
+        characters: { results: any[] };
+      }>({
+        query: gql`
+          query ($searchVillageTerm: [String!]!) {
+            characters(filter: { village: $searchVillageTerm }) {
+              info {
+                count
+                pages
+                next
+                prev
+              }
+              results {
+                _id
+                rank
+                name
+                age
+                avatarSrc
+                description
+                rank
+                village
+                firstAnimeAppearance
+                firstMangaAppearance
+                notableFeatures
+                nameMeaning
+              }
+            }
+          }
+        `,
+        variables: {
+          searchVillageTerm,
+        },
+      })
+       .subscribe((result) => {
+        this.characters = result.data.characters.results;
+        this.filteredCharacters = this.characters;
+      }); 
+  }
+
   chk() {
     const bodyElement = document.querySelector('body');
     if (bodyElement?.classList.toggle('theme-dark')) {
       localStorage.setItem('theme', 'dark');
     } else {
       
-    }
-  }
-
-  filterVillages() {
-    const input = document.querySelector('input[type=checkbox]') as HTMLInputElement
-    if (input.checked) {
-      console.log('funcionou')
-      
-    } else {
-      console.log('nao funcionou')
     }
   }
 }

@@ -1,33 +1,27 @@
 <app-header (serchTermChanges)="search($event)" class="header"></app-header>
 <main main_content>
   <div class="results">
-    <!--  <div class="button_mode">
-      <div class="mangekyou">
-        <div class="point"></div>
-        <div class="point"></div>
-        <div class="point"></div>
-        <div class="circle"></div>
-      </div>
-    </div> -->
     <div class="button_mode" (click)="chk()"></div>
     <div class="filters">
       <div>
         <h2>Village</h2>
-        <ul (click)="filterVillages()">
-          <li><input type="checkbox" /> cloud</li>
-          <li><input type="checkbox" /> grass</li>
-          <li><input type="checkbox" /> springs</li>
-          <li><input type="checkbox" /> leaf</li>
-          <li><input type="checkbox" /> mist</li>
-          <li><input type="checkbox" /> flower</li>
-          <li><input type="checkbox" /> rain</li>
-          <li><input type="checkbox" /> sand</li>
-          <li><input type="checkbox" /> sound</li>
-          <li><input type="checkbox" /> star</li>
-          <li><input type="checkbox" /> rock</li>
-          <li><input type="checkbox" /> waterfall</li>
-          <li><input type="checkbox" /> tides</li>
-        </ul>
+        <form [formGroup]="form">
+        <ng-container formGroupName="villages">
+          <li><input formControlName="cloud" type="checkbox" /> cloud</li>
+          <li><input formControlName="grass" type="checkbox" /> grass</li>
+          <li><input formControlName="springs" type="checkbox" /> springs</li>
+          <li><input formControlName="leaf" type="checkbox" /> leaf</li>
+          <li><input formControlName="mist" type="checkbox" /> mist</li>
+          <li><input formControlName="flower" type="checkbox" /> flower</li>
+          <li><input formControlName="rain" type="checkbox" /> rain</li>
+          <li><input formControlName="sand" type="checkbox" /> sand</li>
+          <li><input formControlName="sound" type="checkbox" /> sound</li>
+          <li><input formControlName="star" type="checkbox" /> star</li>
+          <li><input formControlName="rock" type="checkbox" /> rock</li>
+          <li><input formControlName="waterfall" type="checkbox" /> waterfall</li>
+          <li><input formControlName="tides" type="checkbox" /> tides</li> 
+        </ng-container>
+        </form>
       </div>
       <div>
         <h2>Ranks</h2>
