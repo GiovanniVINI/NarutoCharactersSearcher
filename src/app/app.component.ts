@@ -182,10 +182,20 @@ export class AppComponent implements OnInit {
 
   chk() {
     const bodyElement = document.querySelector('body');
-    bodyElement?.classList.toggle('theme-dark');
+    if (bodyElement?.classList.toggle('theme-dark')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      
+    }
   }
 
   filterVillages() {
-    const check = document.querySelector('input[type=checkbox]');
+    const input = document.querySelector('input[type=checkbox]') as HTMLInputElement
+    if (input.checked) {
+      console.log('funcionou')
+      
+    } else {
+      console.log('nao funcionou')
+    }
   }
 }
