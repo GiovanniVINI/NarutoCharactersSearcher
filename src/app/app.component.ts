@@ -7,7 +7,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css', './responsive/media.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
@@ -17,13 +17,13 @@ export class AppComponent implements OnInit {
     description: string;
     avatarSrc: string;
   }[] = [];
-  villages: any;
   searchTerm: string = '';
   filteredCharacters: any;
-  form: FormGroup
-  filteredPerVillages: any;
+  form: FormGroup;
+  formRank: FormGroup;
   
   @Output() filterPerVillagesChanges = new EventEmitter()
+  @Output() filterPerRankChanges = new EventEmitter()
 
   pageCurrent = 1;
 
@@ -34,21 +34,31 @@ export class AppComponent implements OnInit {
   ) {
    this.form= this.formBuilder.group({
       villages: this.formBuilder.group({
-        cloud: this.formBuilder.control(false),
-        grass: this.formBuilder.control(false),
-        springs: this.formBuilder.control(false),
-        leaf: this.formBuilder.control(false),
-        mist: this.formBuilder.control(false),
-        flower: this.formBuilder.control(false),
-        rain: this.formBuilder.control(false),
-        sand: this.formBuilder.control(false),
-        sound: this.formBuilder.control(false),
-        star: this.formBuilder.control(false),
-        rock: this.formBuilder.control(false),
-        waterfall: this.formBuilder.control(false),
-        tides: this.formBuilder.control(false),
+      cloud: this.formBuilder.control(false),
+      grass: this.formBuilder.control(false),
+      springs: this.formBuilder.control(false),
+      leaf: this.formBuilder.control(false),
+      mist: this.formBuilder.control(false),
+      flower: this.formBuilder.control(false),
+      rain: this.formBuilder.control(false),
+      sand: this.formBuilder.control(false),
+      sound: this.formBuilder.control(false),
+      star: this.formBuilder.control(false),
+      rock: this.formBuilder.control(false),
+      waterfall: this.formBuilder.control(false),
+      tides: this.formBuilder.control(false),
       })
     })
+
+    this.formRank= this.formBuilder.group({
+      ranks: this.formBuilder.group ({
+      chuunin: this.formBuilder.control(false),
+      genin: this.formBuilder.control(false),
+      jounin: this.formBuilder.control(false),
+      kage: this.formBuilder.control(false),
+      unknown: this.formBuilder.control(false),
+    })
+  })
   }
 
   onOpenDialogClick(character: any) {
@@ -64,10 +74,11 @@ export class AppComponent implements OnInit {
       .query<{
         characters: { results: any[] };
         villages: { results: any[] };
+        ranks: { results: any[] };
       }>({
         query: gql`
-          query ($page: Int, $villages: [String!]!) {
-            characters(page: $page, filter: { village: $villages}) {
+          query ($page: Int, $villages, $ranks: [String!]!) {
+            characters(page: $page, filter: { village: $villages, rank: $ranks}) {
               info {
                 count
                 pages
@@ -88,16 +99,12 @@ export class AppComponent implements OnInit {
                 nameMeaning
               }
             }
-            villages {
-              results {
-                name
-              }
-            }
           }
         `,
         variables: {
           page: this.pageCurrent + 1,
-          villages: Object.keys(this.form.get('villages')?.value).filter(key => this.form.get('villages')?.value[key])
+          villages: Object.keys(this.form.get('villages')?.value).filter(key => this.form.get('villages')?.value[key]),
+          ranks: Object.keys(this.formRank.get('ranks')?.value).filter(key => this.formRank.get('ranks')?.value[key])
         },
       })
       .subscribe((result) => {
@@ -114,10 +121,16 @@ export class AppComponent implements OnInit {
       const filterVillageSelected = Object.keys(value).filter(village => value[village])
       this.searchVilage(filterVillageSelected)
     } )
+    this.formRank.get('ranks')?.valueChanges.subscribe((value) => {
+      const filterRankSelected = Object.keys(value).filter(rank => value[rank])
+      this.searchRank(filterRankSelected)
+    })
+
     this.apollo
       .query<{
         characters: { results: any[] };
         villages: { results: any[] };
+        rank: { results: any[] };
       }>({
         query: gql`
           query {
@@ -143,17 +156,11 @@ export class AppComponent implements OnInit {
                 nameMeaning
               }
             }
-            villages {
-              results {
-                name
-              }
-            }
           }
         `,
       })
       .subscribe((result) => {
         this.characters = result.data.characters.results;
-        this.villages = result.data.villages.results;
         this.filteredCharacters = this.characters;
       });
   }
@@ -191,11 +198,6 @@ export class AppComponent implements OnInit {
                 nameMeaning
               }
             }
-            villages {
-              results {
-                name
-              }
-            }
           }
         `,
         variables: {
@@ -204,14 +206,13 @@ export class AppComponent implements OnInit {
       })
       .subscribe((result) => {
         this.characters = result.data.characters.results;
-        this.villages = result.data.villages.results;
         this.filteredCharacters = this.characters;
       });
   }
 
   searchVilage(searchVillageTerm: string[]) {
     if (!searchVillageTerm) {
-      this.filteredPerVillages = this.characters;
+      this.filteredCharacters = this.characters;
     }
     this.apollo
       .query<{
@@ -245,6 +246,37 @@ export class AppComponent implements OnInit {
         `,
         variables: {
           searchVillageTerm,
+        },
+      })
+       .subscribe((result) => {
+        this.characters = result.data.characters.results;
+        this.filteredCharacters = this.characters;
+      }); 
+  }
+
+  searchRank(searchRankTerm: string[]) {
+    if (!searchRankTerm) {
+      this.filteredCharacters = this.characters;
+    }
+    this.apollo
+      .query<{
+        characters: { results: any[] };
+      }>({
+        query: gql`
+          query ($searchRankTerm: [String!]!) {
+            characters(filter: {rank: $searchRankTerm}) {
+              results {
+                name
+                avatarSrc
+                description
+                rank
+                village
+              }
+            }
+          }
+        `,
+        variables: {
+          searchRankTerm,
         },
       })
        .subscribe((result) => {

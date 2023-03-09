@@ -1,31 +1,13 @@
-<!-- <ul>
-  <img src="{{ data.character.avatarSrc }}" alt="" />
-  <li>Name: {{ data.character.name }}</li>
-  <li>Age: {{ data.character.age }}</li>
-  <li>Village : {{ data.character.village }}</li>
-  <li>Rank: {{ data.character.rank }}</li>
-  <br />
-  <li>Description: <span [innerHTML]="data.character.description"></span></li>
-  <br />
-  <li>Notable Features: {{ data.character.notableFeatures }}</li>
-  <li>First Anime Appearance: {{ data.character.firstAnimeAppearance }}</li>
-  <li>First Manga Appearance: {{ data.character.firstMangaAppearance }}</li>
-  <br />
-  <li>Name Meaning: {{ data.character.nameMeaning }}</li>
-</ul> -->
-
-
 <div class="containerDialog">
-  <figure><img src="{{ data.character.avatarSrc }}" alt=""></figure>
+  <img src="{{ data.character.avatarSrc }}" alt="">
   <div class="card-info-character">
     <h2>Name: {{ data.character.name }} </h2>
     <span>Village {{ data.character.village }} </span>
     <span>Rank {{ data.character.rank }} </span>
-    <span>Description</span><p [innerHTML]="data.character.description"></p>
+    <p [innerHTML]="'Description:' + ' ' + data.character.description"></p>
     <p>Notable Features {{ data.character.notableFeatures }} </p>
     <span>First Anime Appearance {{ data.character.firstAnimeAppearance }} </span>
     <span>First Manga Appearance {{ data.character.firstMangaAppearance }} </span>
     <p>Name Meaning: {{ data.character.nameMeaning }} </p>
   </div>
-
 </div>

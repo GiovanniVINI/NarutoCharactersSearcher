@@ -25,13 +25,18 @@
       </div>
       <div>
         <h2>Ranks</h2>
-        <ul>
-          <li><input type="checkbox" /> Chuunin</li>
-          <li><input type="checkbox" /> Genin</li>
-          <li><input type="checkbox" /> Jounin</li>
-          <li><input type="checkbox" /> Kage</li>
-          <li><input type="checkbox" /> Unknown</li>
-        </ul>
+        <form>
+          <ng-container [formGroup]="formRank">
+            <ng-container formGroupName="ranks">
+              <li><input formControlName="chuunin" type="checkbox" /> chuunin</li>
+              <li><input formControlName="genin" type="checkbox" /> genin</li>
+              <li><input formControlName="jounin" type="checkbox" /> jounin</li>
+              <li><input formControlName="kage" type="checkbox" /> kage</li>
+              <li><input formControlName="unknown" type="checkbox" /> unknown</li>
+            </ng-container>
+        
+        </ng-container>
+        </form>
       </div>
     </div>
     <div
