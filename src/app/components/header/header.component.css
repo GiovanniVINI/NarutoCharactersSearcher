@@ -5,6 +5,7 @@
   width: 100%;
   background-color: #fff;
   z-index: 2;
+  top: 0;
 }
 
 .icon {
@@ -28,14 +29,6 @@
   align-items: inherit;
 }
 
-* {
-  box-sizing: border-box;
-}
-.checkbox {
-  opacity: 0;
-  position: absolute;
-}
-
 .label {
   width: 50px;
   height: 26px;
@@ -52,24 +45,9 @@ img {
   width: 30px;
 }
 
-.redirector_docs {
-  background-color: #505098;
-  padding: 5px 10px;
-  color: #fff;
-  border-radius: 10px;
-}
-
-.redirector_chars {
-  background-color: #bdb655;
-  padding: 5px 10px;
-  color: #fff;
-  border-radius: 10px;
-}
-
 .countainerLeftNav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
 }
 
 .search-bar {
