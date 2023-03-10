@@ -21,20 +21,15 @@
           <li><input formControlName="waterfall" type="checkbox" /> waterfall</li>
           <li><input formControlName="tides" type="checkbox" /> tides</li> 
         </ng-container>
-        </form>
-      </div>
-      <div>
+      </form>
         <h2>Ranks</h2>
-        <form>
-          <ng-container [formGroup]="formRank">
-            <ng-container formGroupName="ranks">
-              <li><input formControlName="chuunin" type="checkbox" /> chuunin</li>
-              <li><input formControlName="genin" type="checkbox" /> genin</li>
-              <li><input formControlName="jounin" type="checkbox" /> jounin</li>
-              <li><input formControlName="kage" type="checkbox" /> kage</li>
-              <li><input formControlName="unknown" type="checkbox" /> unknown</li>
-            </ng-container>
-        
+        <form [formGroup]="form">
+        <ng-container formGroupName="ranks">
+          <li><input formControlName="chuunin" type="checkbox" /> chuunin</li>
+          <li><input formControlName="genin" type="checkbox" /> genin</li>
+          <li><input formControlName="jounin" type="checkbox" /> jounin</li>
+          <li><input formControlName="kage" type="checkbox" /> kage</li>
+          <li><input formControlName="unknown" type="checkbox" /> unknown</li>
         </ng-container>
         </form>
       </div>

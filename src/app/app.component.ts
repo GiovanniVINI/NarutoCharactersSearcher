@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@ang
 import { MatDialog } from '@angular/material/dialog';
 import { Apollo, gql } from 'apollo-angular';
 import { CardsComponent } from './components/cards/cards.component';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
   searchTerm: string = '';
   filteredCharacters: any;
   form: FormGroup;
-  formRank: FormGroup;
   
   @Output() filterPerVillagesChanges = new EventEmitter()
   @Output() filterPerRankChanges = new EventEmitter()
@@ -47,16 +46,13 @@ export class AppComponent implements OnInit {
       rock: this.formBuilder.control(false),
       waterfall: this.formBuilder.control(false),
       tides: this.formBuilder.control(false),
-      })
-    })
-
-    this.formRank= this.formBuilder.group({
+      }),
       ranks: this.formBuilder.group ({
-      chuunin: this.formBuilder.control(false),
-      genin: this.formBuilder.control(false),
-      jounin: this.formBuilder.control(false),
-      kage: this.formBuilder.control(false),
-      unknown: this.formBuilder.control(false),
+        chuunin: this.formBuilder.control(false),
+        genin: this.formBuilder.control(false),
+        jounin: this.formBuilder.control(false),
+        kage: this.formBuilder.control(false),
+        unknown: this.formBuilder.control(false),
     })
   })
   }
@@ -77,7 +73,7 @@ export class AppComponent implements OnInit {
         ranks: { results: any[] };
       }>({
         query: gql`
-          query ($page: Int, $villages, $ranks: [String!]!) {
+          query ($page: Int, $villages: [String!]!, $ranks: [String!]!) {
             characters(page: $page, filter: { village: $villages, rank: $ranks}) {
               info {
                 count
@@ -104,7 +100,7 @@ export class AppComponent implements OnInit {
         variables: {
           page: this.pageCurrent + 1,
           villages: Object.keys(this.form.get('villages')?.value).filter(key => this.form.get('villages')?.value[key]),
-          ranks: Object.keys(this.formRank.get('ranks')?.value).filter(key => this.formRank.get('ranks')?.value[key])
+          ranks: Object.keys(this.form.get('ranks')?.value).filter(key => this.form.get('ranks')?.value[key])
         },
       })
       .subscribe((result) => {
@@ -121,7 +117,7 @@ export class AppComponent implements OnInit {
       const filterVillageSelected = Object.keys(value).filter(village => value[village])
       this.searchVilage(filterVillageSelected)
     } )
-    this.formRank.get('ranks')?.valueChanges.subscribe((value) => {
+    this.form.get('ranks')?.valueChanges.subscribe((value) => {
       const filterRankSelected = Object.keys(value).filter(rank => value[rank])
       this.searchRank(filterRankSelected)
     })
@@ -148,7 +144,6 @@ export class AppComponent implements OnInit {
                 age
                 avatarSrc
                 description
-                rank
                 village
                 firstAnimeAppearance
                 firstMangaAppearance
