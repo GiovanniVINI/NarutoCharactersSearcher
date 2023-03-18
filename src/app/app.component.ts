@@ -139,7 +139,7 @@ export class AppComponent implements OnInit {
       const filterVillageSelected = Object.keys(value).filter(
         (village) => value[village]
       );
-      this.filterVilage(filterVillageSelected);
+      this.filterVillage(filterVillageSelected);
     });
     this.form.get('ranks')?.valueChanges.subscribe((value) => {
       const filterRankSelected = Object.keys(value).filter(
@@ -230,7 +230,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  filterVilage(searchVillageTerm: string[]) {
+  filterVillage(searchVillageTerm: string[]) {
     if (!searchVillageTerm) {
       this.filteredCharacters = this.characters;
     }
