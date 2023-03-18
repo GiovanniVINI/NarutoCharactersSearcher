@@ -22,25 +22,6 @@
   align-items: center;
 }
 
-.Nav_links  {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-  align-items: inherit;
-}
-
-.label {
-  width: 50px;
-  height: 26px;
-  display: flex;
-  border-radius:50px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-  position: relative;
-  transform: scale(1.2);
-}
-
 img {
   width: 30px;
 }
@@ -70,15 +51,17 @@ img {
   color: #46464c;
 }
 
-.search-bar button img {
+.search-bar div img {
   width: 14px;
 }
 
-.search-bar button {
+.search-bar div {
   border: 0;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  flex-direction: inherit;
 }
 

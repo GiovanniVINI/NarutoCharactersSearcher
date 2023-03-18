@@ -4,18 +4,17 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  @Output() serchTermChanges = new EventEmitter();
 
-  @Output() serchTermChanges = new EventEmitter()
-
-  filteredCharacters: any
+  filteredCharacters: any;
   searchTerm = new FormControl<string>('');
 
   ngOnInit(): void {
     this.searchTerm.valueChanges.subscribe((value) => {
-      this.serchTermChanges.emit(value)
-    })
+      this.serchTermChanges.emit(value);
+    });
   }
 }

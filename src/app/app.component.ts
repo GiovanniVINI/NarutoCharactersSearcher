@@ -1,4 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Apollo, gql } from 'apollo-angular';
 import { CardsComponent } from './components/cards/cards.component';
@@ -16,45 +20,43 @@ export class AppComponent implements OnInit {
     village: string;
     description: string;
     avatarSrc: string;
+    rank: string;
   }[] = [];
   searchTerm: string = '';
   filteredCharacters: any;
   form: FormGroup;
-  
-  @Output() filterPerVillagesChanges = new EventEmitter()
-  @Output() filterPerRankChanges = new EventEmitter()
-
   pageCurrent = 1;
+  hasMorePages = true;
 
   constructor(
     private readonly apollo: Apollo,
     private readonly matDialog: MatDialog,
     private readonly formBuilder: FormBuilder
   ) {
-   this.form= this.formBuilder.group({
+    this.form = this.formBuilder.group({
       villages: this.formBuilder.group({
-      cloud: this.formBuilder.control(false),
-      grass: this.formBuilder.control(false),
-      springs: this.formBuilder.control(false),
-      leaf: this.formBuilder.control(false),
-      mist: this.formBuilder.control(false),
-      flower: this.formBuilder.control(false),
-      rain: this.formBuilder.control(false),
-      sand: this.formBuilder.control(false),
-      sound: this.formBuilder.control(false),
-      star: this.formBuilder.control(false),
-      rock: this.formBuilder.control(false),
-      waterfall: this.formBuilder.control(false),
-      tides: this.formBuilder.control(false),
+        cloud: this.formBuilder.control(false),
+        grass: this.formBuilder.control(false),
+        springs: this.formBuilder.control(false),
+        leaf: this.formBuilder.control(false),
+        mist: this.formBuilder.control(false),
+        flower: this.formBuilder.control(false),
+        rain: this.formBuilder.control(false),
+        sand: this.formBuilder.control(false),
+        sound: this.formBuilder.control(false),
+        star: this.formBuilder.control(false),
+        rock: this.formBuilder.control(false),
+        waterfall: this.formBuilder.control(false),
+        tides: this.formBuilder.control(false),
       }),
-      ranks: this.formBuilder.group ({
+      ranks: this.formBuilder.group({
         chuunin: this.formBuilder.control(false),
         genin: this.formBuilder.control(false),
         jounin: this.formBuilder.control(false),
         kage: this.formBuilder.control(false),
         unknown: this.formBuilder.control(false),
-    })
-  })
+      }),
+    });
   }
 
   onOpenDialogClick(character: any) {
@@ -66,15 +68,23 @@ export class AppComponent implements OnInit {
   }
 
   onScroll() {
+    if (!this.hasMorePages) return;
+
     this.apollo
       .query<{
-        characters: { results: any[] };
+        characters: {
+          info: any;
+          results: any[];
+        };
         villages: { results: any[] };
         ranks: { results: any[] };
       }>({
         query: gql`
           query ($page: Int, $villages: [String!]!, $ranks: [String!]!) {
-            characters(page: $page, filter: { village: $villages, rank: $ranks}) {
+            characters(
+              page: $page
+              filter: { village: $villages, rank: $ranks }
+            ) {
               info {
                 count
                 pages
@@ -99,11 +109,16 @@ export class AppComponent implements OnInit {
         `,
         variables: {
           page: this.pageCurrent + 1,
-          villages: Object.keys(this.form.get('villages')?.value).filter(key => this.form.get('villages')?.value[key]),
-          ranks: Object.keys(this.form.get('ranks')?.value).filter(key => this.form.get('ranks')?.value[key])
+          villages: Object.keys(this.form.get('villages')?.value).filter(
+            (key) => this.form.get('villages')?.value[key]
+          ),
+          ranks: Object.keys(this.form.get('ranks')?.value).filter(
+            (key) => this.form.get('ranks')?.value[key]
+          ),
         },
       })
       .subscribe((result) => {
+        this.hasMorePages = !!result.data.characters.info.next;
         this.characters = [
           ...this.characters,
           ...result.data.characters.results,
@@ -113,14 +128,25 @@ export class AppComponent implements OnInit {
       });
   }
   ngOnInit() {
-    this.form.get('villages')?.valueChanges.subscribe((value) => { 
-      const filterVillageSelected = Object.keys(value).filter(village => value[village])
-      this.searchVilage(filterVillageSelected)
-    } )
+    window.addEventListener('DOMContentLoaded', () => {
+      const theme = localStorage.getItem('theme');
+      if (theme === 'dark') {
+        document.querySelector('body')?.classList.add('theme-dark');
+      }
+    });
+
+    this.form.get('villages')?.valueChanges.subscribe((value) => {
+      const filterVillageSelected = Object.keys(value).filter(
+        (village) => value[village]
+      );
+      this.filterVilage(filterVillageSelected);
+    });
     this.form.get('ranks')?.valueChanges.subscribe((value) => {
-      const filterRankSelected = Object.keys(value).filter(rank => value[rank])
-      this.searchRank(filterRankSelected)
-    })
+      const filterRankSelected = Object.keys(value).filter(
+        (rank) => value[rank]
+      );
+      this.filterRank(filterRankSelected);
+    });
 
     this.apollo
       .query<{
@@ -180,7 +206,6 @@ export class AppComponent implements OnInit {
               }
               results {
                 _id
-                rank
                 name
                 age
                 avatarSrc
@@ -205,7 +230,7 @@ export class AppComponent implements OnInit {
       });
   }
 
-  searchVilage(searchVillageTerm: string[]) {
+  filterVilage(searchVillageTerm: string[]) {
     if (!searchVillageTerm) {
       this.filteredCharacters = this.characters;
     }
@@ -229,7 +254,6 @@ export class AppComponent implements OnInit {
                 age
                 avatarSrc
                 description
-                rank
                 village
                 firstAnimeAppearance
                 firstMangaAppearance
@@ -243,13 +267,13 @@ export class AppComponent implements OnInit {
           searchVillageTerm,
         },
       })
-       .subscribe((result) => {
+      .subscribe((result) => {
         this.characters = result.data.characters.results;
         this.filteredCharacters = this.characters;
-      }); 
+      });
   }
 
-  searchRank(searchRankTerm: string[]) {
+  filterRank(searchRankTerm: string[]) {
     if (!searchRankTerm) {
       this.filteredCharacters = this.characters;
     }
@@ -259,7 +283,7 @@ export class AppComponent implements OnInit {
       }>({
         query: gql`
           query ($searchRankTerm: [String!]!) {
-            characters(filter: {rank: $searchRankTerm}) {
+            characters(filter: { rank: $searchRankTerm }) {
               results {
                 name
                 avatarSrc
@@ -274,18 +298,15 @@ export class AppComponent implements OnInit {
           searchRankTerm,
         },
       })
-       .subscribe((result) => {
+      .subscribe((result) => {
         this.characters = result.data.characters.results;
         this.filteredCharacters = this.characters;
-      }); 
+      });
   }
 
-  chk() {
+  switchTheme() {
     const bodyElement = document.querySelector('body');
-    if (bodyElement?.classList.toggle('theme-dark')) {
-      localStorage.setItem('theme', 'dark');
-    } else {
-      
-    }
+    const isDark = bodyElement?.classList.toggle('theme-dark');
+    localStorage.setItem('theme', isDark ? 'dark' : '');
   }
 }

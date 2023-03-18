@@ -1,43 +1,45 @@
 <app-header (serchTermChanges)="search($event)" class="header"></app-header>
 <main main_content>
   <div class="results">
-    <div class="button_mode" (click)="chk()"></div>
+    <div class="darkModeMangekyou" (click)="switchTheme()"></div>
     <div class="filters">
       <div>
         <h2>Village</h2>
         <form [formGroup]="form">
-        <ng-container formGroupName="villages">
-          <li><input formControlName="cloud" type="checkbox" /> cloud</li>
-          <li><input formControlName="grass" type="checkbox" /> grass</li>
-          <li><input formControlName="springs" type="checkbox" /> springs</li>
-          <li><input formControlName="leaf" type="checkbox" /> leaf</li>
-          <li><input formControlName="mist" type="checkbox" /> mist</li>
-          <li><input formControlName="flower" type="checkbox" /> flower</li>
-          <li><input formControlName="rain" type="checkbox" /> rain</li>
-          <li><input formControlName="sand" type="checkbox" /> sand</li>
-          <li><input formControlName="sound" type="checkbox" /> sound</li>
-          <li><input formControlName="star" type="checkbox" /> star</li>
-          <li><input formControlName="rock" type="checkbox" /> rock</li>
-          <li><input formControlName="waterfall" type="checkbox" /> waterfall</li>
-          <li><input formControlName="tides" type="checkbox" /> tides</li> 
-        </ng-container>
-      </form>
+          <ng-container formGroupName="villages">
+            <li><input formControlName="cloud" type="checkbox" /> cloud</li>
+            <li><input formControlName="grass" type="checkbox" /> grass</li>
+            <li><input formControlName="springs" type="checkbox" /> springs</li>
+            <li><input formControlName="leaf" type="checkbox" /> leaf</li>
+            <li><input formControlName="mist" type="checkbox" /> mist</li>
+            <li><input formControlName="flower" type="checkbox" /> flower</li>
+            <li><input formControlName="rain" type="checkbox" /> rain</li>
+            <li><input formControlName="sand" type="checkbox" /> sand</li>
+            <li><input formControlName="sound" type="checkbox" /> sound</li>
+            <li><input formControlName="star" type="checkbox" /> star</li>
+            <li><input formControlName="rock" type="checkbox" /> rock</li>
+            <li>
+              <input formControlName="waterfall" type="checkbox" /> waterfall
+            </li>
+            <li><input formControlName="tides" type="checkbox" /> tides</li>
+          </ng-container>
+        </form>
         <h2>Ranks</h2>
         <form [formGroup]="form">
-        <ng-container formGroupName="ranks">
-          <li><input formControlName="chuunin" type="checkbox" /> chuunin</li>
-          <li><input formControlName="genin" type="checkbox" /> genin</li>
-          <li><input formControlName="jounin" type="checkbox" /> jounin</li>
-          <li><input formControlName="kage" type="checkbox" /> kage</li>
-          <li><input formControlName="unknown" type="checkbox" /> unknown</li>
-        </ng-container>
+          <ng-container formGroupName="ranks">
+            <li><input formControlName="chuunin" type="checkbox" /> chuunin</li>
+            <li><input formControlName="genin" type="checkbox" /> genin</li>
+            <li><input formControlName="jounin" type="checkbox" /> jounin</li>
+            <li><input formControlName="kage" type="checkbox" /> kage</li>
+            <li><input formControlName="unknown" type="checkbox" /> unknown</li>
+          </ng-container>
         </form>
       </div>
     </div>
     <div
       infinite-scroll
-      [infiniteScrollDistance]="2"
-      [infiniteScrollThrottle]="50"
+      [infiniteScrollDistance]="3"
+      [infiniteScrollThrottle]="450"
       (scrolled)="onScroll()"
       [scrollWindow]="true"
       class="cards_section"
@@ -47,11 +49,15 @@
         class="card"
         *ngFor="let character of filteredCharacters"
       >
-        <img src="{{ character.avatarSrc }}" alt="" />
-        <p>Name: {{ character.name }}</p>
-        <p>Village: {{ character.village }}</p>
-        <p>Rank: {{ character.rank }}</p>
-        <p>Description: {{ character.description.slice(0, 65) }} ...</p>
+        <img src="{{ character.avatarSrc }}" />
+        <h1>Name: {{ character.name }}</h1>
+        <span>Village: {{ character.village }}</span>
+        <span>Rank: {{ character.rank }}</span>
+        <p
+          [innerHTML]="
+            'Description:' + ' ' + character.description.slice(0, 65) + '...'
+          "
+        ></p>
       </div>
     </div>
   </div>

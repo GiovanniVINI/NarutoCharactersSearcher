@@ -38,10 +38,17 @@
 }
 
 .card {
-  background-color: rgb(246, 241, 233);
+  background-color: rgba(189, 175, 175, 0.2);
   border-radius: 10px;
   padding: 20px;
   cursor: context-menu;
+}
+
+.card h1 {
+  font-weight: 200;
+  font-size: 17px;
+  padding-bottom: 12px;
+  padding-top: 12px;
 }
 
 .card:hover {
@@ -72,18 +79,22 @@ body.theme-dark #github_icon {
   filter: invert();
 }
 
+body.theme-dark .card {
+  background-color: #e4e2e2;
+}
+
 body.theme-dark .card:hover {
   box-shadow: 1px 5px 10px 5px rgba(3, 3, 3, 0.8);
 }
 
-.button_mode {
+.darkModeMangekyou {
   cursor: pointer;
   border: none;
   position: fixed;
   bottom: 65px;
   right: 25px;
   background-size: contain;
-  background-image: url(../assets/pngegg.png);
+  background-image: url(../assets/pngegg.png); /*Mangekyou icon, author: ShounenSuki, origin: Narutpedia, picked in: Wikipédia*/
   background-position: center center;
   background-clip: content-box;
   border-radius: 50%;
@@ -93,8 +104,8 @@ body.theme-dark .card:hover {
   box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
 }
 
-.button_mode:hover {
-  animation: spin 3s ease-in-out;
+.darkModeMangekyou:hover {
+  animation: spin 2.5s ease-in-out;
 }
 
 @keyframes spin {
@@ -106,4 +117,3 @@ body.theme-dark .card:hover {
     transform: rotate(720deg);
   }
 }
-

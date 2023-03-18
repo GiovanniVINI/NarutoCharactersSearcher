@@ -3,11 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { AppComponent } from './app.component';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { MatDialogModule } from  "@angular/material/dialog"
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
-import { GraphQLModule } from './graphql.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,26 +21,24 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent
-  ],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     ApolloModule,
     InfiniteScrollModule,
-    GraphQLModule,
     BrowserAnimationsModule,
     MatDialogModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [ {
-    provide: APOLLO_OPTIONS,
-    useFactory: createApollo,
-    deps: [HttpLink],
-  },],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: createApollo,
+      deps: [HttpLink],
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
