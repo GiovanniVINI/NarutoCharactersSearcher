@@ -30,7 +30,7 @@
 * [Challenges, Problems and Solutions](#challenges)
 * [Improvements](#improvements)
 * [About The Developer](#aboutTheDev)
-* [Contact](#functionalities)
+* [Contact](#contact)
 
 <br>
 
