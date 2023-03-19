@@ -186,7 +186,7 @@ I'm also looking for an <b>opportunity to work in a team</b>, to grow together w
 # Contact :pushpin:
 
 <div align="center"> 
-<a href = "mailto:goulartvinicius.ti@gmail.com"> <img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" style="border-radius: 30px" target="_blank"></a>
+<a href = "mailto:goulartviniciust.i@gmail.com"> <img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" style="border-radius: 30px" target="_blank"></a>
 <a href="https://www.linkedin.com/in/vinícius-goulart-705970216/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" style="border-radius: 30px" target="_blank"></a> 
 </div>
 </div>
