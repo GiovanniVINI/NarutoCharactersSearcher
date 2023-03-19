@@ -3,11 +3,13 @@
 <div align="center"><img alt="Naruto Shippuden 248 Gif" aria-hidden="true" class="TZM0T" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/24f9824d-c365-4b49-bff5-e7a30a160859/d5ql6np-6a1d4959-35c7-45d3-b779-ce3e596c031d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI0Zjk4MjRkLWMzNjUtNGI0OS1iZmY1LWU3YTMwYTE2MDg1OVwvZDVxbDZucC02YTFkNDk1OS0zNWM3LTQ1ZDMtYjc3OS1jZTNlNTk2YzAzMWQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.XUtuQVktOxEKknLHclQvfRFRCoq6amrpvcrkiRvUkIc" width=" 500px" height= "316px"></div>
 
 <br>
-<!--<div align="center">
+<div align="center">
 
 ## Idiomas Disponíveis
-[English version :us:](https://)
-</div> -->
+[Versão em inglês :us:](https://github.com/GiovanniVINI/NarutoCharactersSearcher/blob/master/README.md)
+</div>
+
+<br>
 
 ## Sumário
 * [Sobre a Aplicação](#aboutTheApplication)
@@ -152,7 +154,7 @@ KISS: princípio que prega que a simplicidade é a melhor abordagem para a resol
 <div id="challenges">
 
 # Desafios, Problemas e Soluções :exclamation:
-Durante o desenvolvimento do projeto, enfrentei alguns desafios e problemas. Como essa foi a minha primeira aplicação completa, tive dificuldades principalmente na paginação e na filtragem, mas consegui superá-las com muita pesquisa e horas de programação.
+Durante o desenvolvimento do projeto, enfrentei alguns desafios e problemas. Como essa foi minha primeira aplicação completa, tive dificuldades principalmente na paginação e na filtragem, mas consegui superá-las com muita pesquisa e horas de programação.
 
 Outro obstáculo que encontrei foi com os testes unitários. Como eu tinha pouco conhecimento sobre o assunto, tive dificuldade para entender como fazê-los. No entanto, estou estudando mais sobre o tema porque entendo a importância dos testes para garantir a qualidade do código e a confiabilidade da aplicação.
 
@@ -166,7 +168,7 @@ Aqui vão algumas possiveis melhorias:
 
  1. <b>CSS:</b> Melhorias no design dos cards, que podem ser mais atraentes e bem organizados, tornando a experiência do usuário mais agradável;
  2. <b>Testes:</b> Adição e melhoria de testes unitários e integrados para garantir a integridade do código e minimizar o número de bugs ou erros que possam ocorrer durante a execução do aplicativo;
- 3. <b>Segurança:</b> Com relação à segurança, admito que não tenho conhecimento avançado na área, mas estou comprometido a me aprofundar e buscar conhecimentos para incluir medidas de segurança mais eficazes em futuras atualizações do projeto. É fundamental garantir que os dados dos usuários estejam protegidos e seguros.
+ 3. <b>Segurança:</b> Com relação à segurança, admito que não tenho conhecimento aprofundado na área, mas estou comprometido a me aprofundar e buscar conhecimentos para incluir medidas de segurança mais eficazes em futuras atualizações do projeto. É fundamental garantir que os dados dos usuários estejam protegidos e seguros.
 </div>
 <br>
 <div id="aboutTheDev">
@@ -179,6 +181,7 @@ Com uma <b>sede incansável de aprendizado</b> e desenvolvimento, estou sempre e
 
 Também estou em busca de uma <b>oportunidade de trabalhar em equipe</b>, para crescer junto com outros desenvolvedores e criar <b>soluções inovadoras</b>. Me considero um profissional <b>comprometido com o resultado final</b> e disposto a fazer o que for necessário para entregar um trabalho de qualidade.
 </div>
+<br>
 <div id="contact"></div>
 
 # Contato :pushpin:
