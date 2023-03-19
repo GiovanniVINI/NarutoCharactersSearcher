@@ -50,12 +50,12 @@
         *ngFor="let character of filteredCharacters"
       >
         <img src="{{ character.avatarSrc }}" />
-        <h1>Name: {{ character.name }}</h1>
-        <span>Village: {{ character.village }}</span>
-        <span>Rank: {{ character.rank }}</span>
+        <h1><b>Name:</b> {{ character.name }}</h1>
+        <p><b>Village:</b> {{ character.village }}</p>
+        <p><b>Rank:</b> {{ character.rank }}</p>
         <p
           [innerHTML]="
-            'Description:' + ' ' + character.description.slice(0, 65) + '...'
+            '<b>Description:</b>' + ' ' + character.description.slice(0, 65) + '...'
           "
         ></p>
       </div>
